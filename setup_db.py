@@ -1,6 +1,6 @@
 import sqlite3
 
-conn = sqlite3.connect("logistic.db")
+conn = sqlite3.connect("logistica.db")
 cursor = conn.cursor()
 
 cursor.execute("""
@@ -47,8 +47,6 @@ CREATE TABLE IF NOT EXISTS orders (
     qty INTEGER NOT NULL,
     status TEXT NOT NULL DEFAULT 'pending',
     from_warehouse INTEGER,
-
-    to_warehouse INTEGER,
     created_at TEXT DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (from_warehouse) REFERENCES warehouses(id),
     FOREIGN KEY (product_id) REFERENCES products(id),
@@ -85,7 +83,7 @@ cursor.executemany(
         ("Newark Fulfillment", "Newark, US"),
     ]
 )
-
+ 
 cursor.executemany(
     "INSERT INTO products (name, stock, supplier_id, warehouse_id) VALUES (?, ?, ?, ?)",
     [
